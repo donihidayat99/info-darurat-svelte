@@ -4,7 +4,7 @@
 
 <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
   <div>
-    <!-- Gambar / Icon Box dengan Badge Biaya di Pojok Kanan Atas -->
+    <!-- Gambar / Icon Box dengan Badge Biaya & Prioritas di Pojok Kanan Atas -->
     <div class="h-36 rounded-xl bg-gray-100 mb-4 overflow-hidden relative flex items-center justify-center border border-gray-200">
       <div class="text-center space-y-1">
         <span class="text-3xl">
@@ -16,7 +16,12 @@
         </span>
         <span class="text-[10px] text-gray-400 block font-medium uppercase tracking-wider">Aset Bantuan Siaga</span>
       </div>
-      <div class="absolute top-2 right-2">
+      <div class="absolute top-2 right-2 flex items-center gap-1">
+        {#if item.is_featured}
+          <span class="bg-amber-100 text-amber-800 border-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-md border shadow-sm flex items-center gap-0.5">
+            ⭐ Unggulan
+          </span>
+        {/if}
         <span class="{item.cost === 'Gratis' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-blue-50 text-blue-700 border-blue-200'} text-[10px] font-bold px-2.5 py-0.5 rounded-md border shadow-sm bg-white">
           {item.cost}
         </span>

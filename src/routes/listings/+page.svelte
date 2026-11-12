@@ -10,7 +10,8 @@
       cost: 'Gratis',
       instansi: 'Relawan Kemanusiaan Purwokerto',
       location: 'Purwokerto Utara, Kab. Banyumas',
-      phone: '081234567890'
+      phone: '081234567890',
+      is_featured: true // Disponsori / Prioritas Utama
     },
     {
       id: 2,
@@ -57,19 +58,21 @@
   ];
 
   let filteredListings = $derived(
-    allListings.filter((item) => {
-      const matchQuery = 
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.instansi.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.category.toLowerCase().includes(searchQuery.toLowerCase());
+    allListings
+      .filter((item) => {
+        const matchQuery = 
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.instansi.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.category.toLowerCase().includes(searchQuery.toLowerCase());
 
-      if (selectedCategory === 'Semua') return matchQuery;
-      return matchQuery && (
-        item.title.toLowerCase().includes(selectedCategory.toLowerCase()) ||
-        item.category.toLowerCase().includes(selectedCategory.toLowerCase())
-      );
-    })
+        if (selectedCategory === 'Semua') return matchQuery;
+        return matchQuery && (
+          item.title.toLowerCase().includes(selectedCategory.toLowerCase()) ||
+          item.category.toLowerCase().includes(selectedCategory.toLowerCase())
+        );
+      })
+      .sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0)) // Prioritas utama selalu di atas
   );
 </script>
 
